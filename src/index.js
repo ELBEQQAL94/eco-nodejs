@@ -4,25 +4,25 @@ require('dotenv').config();
 
 // connect to mongodb
 // connect mongoose to database
-// const db = process.env.MONGOURI;
+const db = process.env.MONGOURI;
 
-// mongoose.set('useFindAndModify', false);
-// mongoose.connect(
-//   db,
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   },
-//   () => { console.log('Mongodb is connected..'); },
-// );
+mongoose.set('useFindAndModify', false);
+mongoose.connect(
+  db,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  },
+  () => { console.log('Database is connected..'); },
+);
 
-// // hundle database error
-// mongoose.connection.on('error', (err) => console.log('DB connection error:', err.message));
+// hundle database error
+mongoose.connection.on('error', (err) => console.log('Database connection error:', err.message));
 
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4444;
 
 
 // server running on port:8080
