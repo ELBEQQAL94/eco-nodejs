@@ -38,14 +38,28 @@ exports.updateCategory = (req, res) => {
     });
 };
 
-exports.getCategories = (req, res) => {
-    Category.find((error, categories) => {
+exports.getCategories = async(req, res) => {
+    let { sortBy='_id', order='asc', limit = 2, page = 1 } = req.query;
+
+    const count = await Category.countDocuments();
+
+    const query = Category.find({})
+        .sort([[sortBy, order]])
+        .limit(limit * 1)
+        .skip((page - 1) * limit);
+
+    query.exec(function (error, categories) {
         if(error) {
             return res.status(400).json({
                 error: error.message,
             });
         };
-        res.json(categories);
+        res.json({
+            total_elements: count,
+            total_pages: Math.ceil(count / limit),
+            current_page: +page,
+            categories,
+        });
     });
 };
 

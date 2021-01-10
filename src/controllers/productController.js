@@ -60,14 +60,10 @@ exports.createProduct = (req, res) => {
     });
 };
 
-exports.getProducts = (req, res) => {
+exports.getProducts = async(req, res) => {
     let { sortBy='_id', order='asc', limit = 6, page = 1 } = req.query;
 
-    sortBy = sortBy || '_id';
-    order = order || 'asc';
-
-    
-    const currentPage = ((page - 1) * limit);
+    const count = await Product.countDocuments();
     
     const query = Product.find({})
         .select('-photo')
@@ -82,7 +78,8 @@ exports.getProducts = (req, res) => {
             });
         };
         res.json({
-            total_elements: products.length,
+            total_elements: count,
+            total_pages: Math.ceil(count / limit),
             current_page: +page,
             products,
         });

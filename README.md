@@ -32,14 +32,23 @@
     * [x] Logged In
     * [x] Logged Out
 * [x] Create user end point
+    * [ ] Get Users
+    * [ ] Update user for specific user
+    * [ ] Update any user for admin role
+    * [ ] Soft delete User for specific user
+    * [ ] Delete user for role admin user
+    * [ ] add pagination
+    * [ ] add sorting
     * [x] GET One User
 * [ ] Create Category end point
     * [x] Create Model
     * [x] POST Category
-    * [ ] GET Categories
-    * [ ] GET one Category
-    * [ ] PUT Category
-    * [ ] DELETE Category
+    * [x] GET Categories
+    * [x] GET one Category
+    * [x] PUT Category
+    * [x] DELETE Category
+    * [x] Add sorting
+    * [x] Add pagination
 * [x] Create Product end point
     * [x] Create Model
     * [x] Update Product
