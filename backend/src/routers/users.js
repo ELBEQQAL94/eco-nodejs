@@ -5,9 +5,10 @@ const router = express.Router();
 const { getUserById, requireLoggedIn, isAuthenticated, isAdmin } = require('../middlewares');
 
 // Controllers
-const { getUser } = require('../controllers');
+const { getUser, updateUser } = require('../controllers');
 
 router.get('/:userId', requireLoggedIn, isAuthenticated, getUser);
+router.put('/:userId', requireLoggedIn, isAuthenticated, updateUser);
 
 router.param('userId', getUserById);
 

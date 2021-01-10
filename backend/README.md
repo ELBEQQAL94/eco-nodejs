@@ -55,6 +55,7 @@
     * [x] Delete product
     * [x] Get products
     * [x] Get product
+    * [x] GET related products
     * [ ] Get product for sepcific seller
     * [x] Create new product
         * [x] Valid size and extention for images
