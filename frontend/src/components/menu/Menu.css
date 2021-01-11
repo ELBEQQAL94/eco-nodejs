@@ -1,0 +1,27 @@
+.navbar-nav .nav-item .nav-link {
+    font-weight: bold;
+}
+
+.active {
+    color: orange !important;
+}
+
+.navbar {
+    margin-top: 15px;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+}
+
+/** 
+
+======= BUTTON =======
+
+**/
+.register-btn {
+    border: 1px solid orange;
+}
+
+.register-btn, .login-btn {
+    font-weight: bold;
+    text-transform: uppercase;
+}
