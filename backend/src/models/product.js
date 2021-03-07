@@ -24,6 +24,10 @@ const ProductSchema = new Schema(
         type: Number,
         default: 1,
     },
+    solde: {
+      type: Number,
+      default: 0,
+  },
     photo: {
       data: Buffer,
       contentType:String,
@@ -38,6 +42,7 @@ const ProductSchema = new Schema(
         default: false,
     },
     imageUrl: String,
+    value: String
   },
   {
     timestamps: true,

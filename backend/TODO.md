@@ -59,7 +59,11 @@
     * [ ] Get product for sepcific seller
     * [x] Create new product
         * [x] Valid size and extention for images
-        
+* [ ] Add Oauth width Google, Facebook, Twitter, Github
+* [ ] Reset password
+* [ ] Validate email
+* [ ] Notification
+* [ ] Add sanitize        
 ## FRONTEND:
 ----
 

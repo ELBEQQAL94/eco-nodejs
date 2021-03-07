@@ -8,6 +8,7 @@ function validateProduct() {
         price: Joi.number(),
         quantity: Joi.number(),
         category: Joi.string().required(),
+        shipping: Joi.string()
     });
 
     return schema;

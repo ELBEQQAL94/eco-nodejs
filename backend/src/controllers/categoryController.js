@@ -63,6 +63,23 @@ exports.getCategories = async(req, res) => {
     });
 };
 
+exports.getAllCategories = async(req, res) => {
+
+
+    const query = Category.find({});
+
+    query.exec(function (error, categories) {
+        if(error) {
+            return res.status(400).json({
+                error: error.message,
+            });
+        };
+        res.json({
+            categories,
+        });
+    });
+};
+
 exports.getCategory = (req, res) => {
 
     const { categoryId } = req.params;

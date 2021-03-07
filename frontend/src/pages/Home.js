@@ -1,18 +1,71 @@
-// LIBS
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-// CSS
-import "./Home.css";
+// ACTIONS
+import { getProducts } from "../store/actions/products";
+
+// TYPES
+import { GET_PRODUCTS } from "../store/types/products";
+
+// COMPONENTS
+import Card from "../components/card/Card";
 
 const Home = () => {
-    return (
-        <div className="jumbotron main-home">
-            <h1 className="display-4">Hello, User</h1>
-            <p className="lead">This is a simple hero unit, a simple ecommerce project build on MERN Stack</p>
-            <hr className="my-4" />
-            <Link className="btn btn-primary btn-lg" to="/shop">Shop</Link>
-        </div>
-    );
+  const [productsBestSellers, setProductsBestSellers] = useState([]);
+  const [productsArrivals, setProductsArrivals] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const loadBestSellers = () => {
+    getProducts("solde")
+      .then((response) => {
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: response.data.products,
+        });
+        setProductsBestSellers(response.data.products);
+      })
+      .catch((error) => console.log(error.response.data));
+  };
+
+  const loadArrivals = () => {
+    getProducts("createdAt", "desc", 3)
+      .then((response) => {
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: response.data.products,
+        });
+        setProductsArrivals(response.data.products);
+      })
+      .catch((error) => console.log(error.response.data));
+  };
+
+  useEffect(() => {
+    loadBestSellers();
+    loadArrivals();
+  }, []);
+
+  return (
+    <div>
+      <h1>Arrival products</h1>
+      <div className="row">
+        {productsArrivals?.map((product) => (
+          <div className="col-md-4" key={product._id}>
+            <Card product={product} />
+          </div>
+        ))}
+      </div>
+      <hr />
+      <h1>Best Sellers products</h1>
+      <div className="row">
+        {productsBestSellers?.map((product) => (
+          <div className="col-md-4" key={product._id}>
+            <Card product={product} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Home;

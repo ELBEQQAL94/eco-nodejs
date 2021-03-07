@@ -45,6 +45,7 @@ exports.createProduct = (req, res) => {
     const { error } = schema.validate(fields);
 
     if (error) {
+      console.log(error.details)
       return res.status(400).json({
         error: error.details[0].message,
       });

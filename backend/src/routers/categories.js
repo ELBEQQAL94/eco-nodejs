@@ -12,8 +12,9 @@ const {
 
 
 // Controllers
-const { createCategory, getCategories, getCategory, updateCategory, deleteCategory } = require('../controllers');
+const { createCategory, getAllCategories, getCategories, getCategory, updateCategory, deleteCategory } = require('../controllers');
 
+router.get('/all', getAllCategories);
 router.get('/', getCategories);
 router.get('/:categoryId', getCategory);
 router.post('/user/:userId/', [requireLoggedIn, isAuthenticated, isAdmin, categoryValidator], createCategory);

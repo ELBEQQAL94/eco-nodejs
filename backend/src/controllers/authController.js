@@ -5,11 +5,25 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 exports.signup = (req, res) => {
-    const user = new User(req.body);
-    user.save((err, user) => {
-        if(err) return res.status(400).send(err);
-        return res.send(user);
+    const nawUser = new User(req.body);
+    const email = req.body.email;
+
+    //check if email exists
+    User.findOne({ email }, (err, user) => {
+        if(user) {
+            return res.status(400).json({
+                message: "Email already exists, try other one!"
+            });
+        } else {
+            nawUser.save((err, user) => {
+                if(err) return res.status(400).send(err);
+                user.hashed_password = undefined;
+                user.salt = undefined;
+                return res.send(user);
+            });
+        }
     });
+
 };
 
 exports.login = (req, res) => {
@@ -33,7 +47,7 @@ exports.login = (req, res) => {
         // generate Token for user
         const token = jwt.sign({ _id:user._id, role: user.role }, process.env.JWT_SECRET);
 
-        res.cookie('user_token', token, { expire: new Date() + 86400000 });
+        res.cookie('token', token, { expire: new Date() + 86400000 });
 
         const { _id, name, email, role } = user;
 
@@ -50,7 +64,7 @@ exports.login = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-    res.clearCookie('user_token');
+    res.clearCookie('token');
     res.json({
         message: "User Log Out!"
     });

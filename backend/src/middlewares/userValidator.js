@@ -31,7 +31,9 @@ exports.userLoginValidator = (req, res, next) => {
     const errors = req.validationErrors();
 
     if(errors) {
-        res.status(400).json(errors);
+        return res.status(400).json({
+            error: errors[0].msg
+        });
     } else {
         next();
     };

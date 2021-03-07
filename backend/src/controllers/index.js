@@ -11,6 +11,7 @@ const {
     getCategory, 
     updateCategory, 
     deleteCategory,
+    getAllCategories,
 } = require('./categoryController');
 
 // Products Controller
@@ -35,6 +36,7 @@ module.exports = {
     updateCategory,
     getCategories,
     getCategory,
+    getAllCategories,
     deleteCategory,
     createProduct,
     getProducts,
